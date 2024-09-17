@@ -1,14 +1,21 @@
-# Esercizio 02
+# Esercizio: Gestione di un Conto Bancario
 
-Creare una classe `ContoCorrente` con i seguenti attributi: `iban`, `intestatario`, `saldo_disponibile` e `portafoglio_investimenti`.
+Scrivi una classe `ContoBancario` che rappresenta un conto bancario. La classe deve avere i seguenti attributi e metodi:
 
-Il costruttore `__init__()` deve permettere di istanziare un nuovo oggetto `ContoCorrente` con i valori specificati per `iban`, `intestatario` e `saldo_disponibile`. L'attributo `portafoglio_investimenti` deve essere inizializzato a 0.
+## Attributi:
+- `titolare` (pubblico): il nome del titolare del conto.
+- `__saldo` (privato): il saldo del conto.
 
-La classe deve avere un metodo `__str__()` che restituisce una stringa rappresentativa dell'oggetto `ContoCorrente`.
+## Metodi:
+- `__init__(self, titolare, saldo_iniziale)`: costruttore che inizializza il titolare e il saldo iniziale del conto.
+- `deposita(self, importo)`: metodo pubblico che permette di depositare un importo nel conto.
+- `preleva(self, importo)`: metodo pubblico che permette di prelevare un importo dal conto, se il saldo è sufficiente.
+- `mostra_saldo(self)`: metodo pubblico che restituisce il saldo attuale del conto.
 
-Inoltre, la classe deve avere i seguenti metodi:
-- `deposita(importo)` che aggiunge l'importo specificato a `saldo_disponibile`.
-- `preleva(importo)` che sottrae l'importo specificato da `saldo_disponibile` se sufficiente, altrimenti restituisce `False`.
-- `investi(importo)` che trasferisce l'importo specificato da `saldo_disponibile` a `portafoglio_investimenti` se sufficiente, altrimenti restituisce `False`.
-- `disinvesti(importo)` che trasferisce l'importo specificato da `portafoglio_investimenti` a `saldo_disponibile` se sufficiente, altrimenti restituisce `False`.
-- `get_patrimonio_totale()` che restituisce la somma di `saldo_disponibile` e `portafoglio_investimenti`.
+## Esempio di utilizzo:
+```python
+conto = ContoBancario("Alice", 1000)
+conto.deposita(500)
+conto.preleva(200)
+print(f"Saldo attuale: {conto.mostra_saldo()}")  # Output: Saldo attuale: 1300
+```

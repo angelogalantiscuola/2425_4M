@@ -1,0 +1,16 @@
+@startuml ContoCorrente
+class ContoCorrente {
+    iban : string
+    intestatario : string
+    saldo_disponibile : float
+    portafoglio_investimenti : float
+    --
+    constructor(iban, intestatario, saldo_disponibile)
+    str(): string
+    deposita(importo : float): void
+    preleva(importo : float): bool
+    investi(importo : float): bool
+    disinvesti(importo : float): bool
+    get_patrimonio_totale(): float
+}
+@enduml

@@ -1,17 +1,12 @@
-@startuml ContoCorrente
-class ContoCorrente {
-    iban : string
-    intestatario : string
-    saldo_disponibile : float
-    portafoglio_investimenti : float
-    --
-    constructor(iban, intestatario, saldo_disponibile)
-    str(): string
-    --
-    deposita(importo : float): void
-    preleva(importo : float): bool
-    investi(importo : float): bool
-    disinvesti(importo : float): bool
-    get_patrimonio_totale(): float
+```plantuml ContoBancario
+@startuml ContoBancario
+class ContoBancario {
+  + titolare : string
+  - saldo : float
+  --
+  + __init__(titolare: string, saldo_iniziale: float)
+  + deposita(importo: float) : void
+  + preleva(importo: float) : void
+  + mostra_saldo() : float
 }
 @enduml
