@@ -1,0 +1,29 @@
+@startuml
+
+class Studente {
+  - nome: string
+  - cognome: string
+  - genere: string
+  - eta: int
+  - corsi_iscritti: list
+
+  + __init__(nome: string, cognome: string, genere: string, eta: int)
+  + iscrivi_corso(corso: Corso): void
+}
+
+class Corso {
+  - corso_id: string
+  - uni_name: string
+  - descrizione: string
+  - studenti_iscritti: list
+
+  + __init__(corso_id: string, uni_name: string, descrizione: string)
+  + add_studente(studente: Studente): void
+  + remove_studente(studente: Studente): void
+  + studenti_iscritti_count(): int
+  + studenti_iscritti(): list
+}
+
+Studente "n" -- "n" Corso : iscrivi_corso
+
+@enduml

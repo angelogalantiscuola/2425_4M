@@ -1,0 +1,23 @@
+@startuml esercizio_014
+class Student {
+  -name: string
+  -surname: string
+  -gender: string
+  -age: int
+
+  +constructor(name: string, surname: string, gender: string, age: int): void
+}
+
+class Classroom {
+  -id: string
+  -school_name: string
+  -description: string
+  -Student_list: list
+
+  +add_student(id: string, name: string): int
+  +remove_student(student: string): int
+  +Count_Enrolled_Students(): int
+}
+
+Student "n" --> "1" Classroom : attending the
+@enduml

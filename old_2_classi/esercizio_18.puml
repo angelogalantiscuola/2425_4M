@@ -1,0 +1,53 @@
+@startuml esercizio_018
+
+class Vehicle {
+    - make: str
+    - model: str
+    - year: int
+    __init__(make: str, model: str, year: int)
+    + display_info(): str
+    + __str__(): str
+}
+
+class Customer {
+    - name: str
+    - address: str
+    - phone_number: str
+    __init__(name: str, address: str, phone_number: str)
+    + __str__(): str
+}
+
+class Salesperson {
+    - name: str
+    - employee_id: str
+    - territory: str
+    __init__(name: str, employee_id: str, territory: str)
+    + __str__(): str
+}
+
+class Showroom {
+    - name: str
+    - vehicles: list
+    __init__(name: str)
+    + add_vehicle(vehicle: Vehicle): void
+    + remove_vehicle(vehicle: Vehicle): void
+    + __str__(): str
+}
+
+class Sale {
+    - vehicle: Vehicle
+    - customer: Customer
+    - salesperson: Salesperson
+    - price: float
+    - date: datetime
+    __init__(vehicle: Vehicle, customer: Customer, salesperson: Salesperson, price: float)
+    + display_info(): str
+    + __str__(): str
+}
+
+Vehicle "1" *-- "1..*" Sale
+Customer "1" *-- "1..*" Sale
+Salesperson "1" *-- "1..*" Sale
+Showroom "1" *-- "0..*" Vehicle
+
+@enduml

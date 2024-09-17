@@ -1,0 +1,29 @@
+@startuml Bicicletta
+Bike <|--FatBike
+Bike <|--MountainBike
+
+class Bike{
+ speed:float
+ marcia:int
+ --
+ constructor(speed,marcia) : void
+ speedUp() : void
+ speedDown() : void
+ setMarcia(nuova_marcia:int) : void
+ __str:__() : str
+}
+class FatBike{
+ spessore_pneumatico:int
+ --
+ constructor(spessore_pneumatico) : void
+ getSpessorePneumatico() : int
+ __str:__() : str
+}
+class MountainBike{
+ ammortizzatori:bool
+ --
+ constructor(ammortizzatori) : void
+ getammortizzatori() : bool
+ __str__() : str
+}
+@enduml

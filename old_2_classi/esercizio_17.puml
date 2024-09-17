@@ -1,0 +1,63 @@
+@startuml esercizio_017
+
+class User {
+  -UserID
+  -Username
+  -Email
+  -Password
+  -FriendsList
+  +__init__(user_id, username, email, password)
+  +add_friend(friend)
+  +remove_friend(friend)
+  +post_content(content)
+}
+
+class RegularUser {
+  -Interests
+  -ActivityLog
+  +__init__(user_id, username, email, password, interests)
+  +like_post(post)
+  +comment_on_post(post, comment)
+}
+
+
+class BusinessUser {
+  -BusinessID
+  -Products
+  -CustomerReviews
+  +__init__(user_id, username, email, password, business_id, products)
+  +advertise()
+  +respond_to_reviews(review)
+}
+
+
+class Post {
+  -PostID
+  -Content
+  -LikesCount
+  -Comments
+  +__init__(content)
+  +like()
+  +comment(comment)
+  +__str__()
+}
+
+class TextPost {
+  -WordCount
+  -Language
+  +__init__(content, word_count, language)
+  +analyze_sentiment()
+}
+
+class ImagePost {
+  -ImageURL
+  -Resolution
+  +__init__(content, image_url, resolution)
+  +apply_filter(filter_type)
+}
+Post <|-- ImagePost
+Post <|-- TextPost
+User <|-- BusinessUser
+User <|-- RegularUser
+
+@enduml

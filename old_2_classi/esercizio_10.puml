@@ -1,0 +1,26 @@
+@startuml
+Person <|-- Student
+Person <|-- Teacher
+class Person{
+  name:str
+  age:int
+  --
+  constructor(name,age)
+  --
+  Introduction()
+}
+class Student{
+  grade:int
+  --
+  constructor(grade)
+  --
+  Introduction()
+}
+class Teacher{
+  subject:str
+  --
+  constructor(subject)
+  --
+  Introduction()
+}
+@enduml

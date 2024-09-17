@@ -1,0 +1,19 @@
+@startuml es12
+class Persona {
+   nome: Int
+   eta: Int
+   passaporto: String
+  + param_Passaporto(Passaporto_numero: String, paese: String): void
+}
+
+class Passaporto {
+   Passaporto_numero: String
+   paese: String
+   persona: String
+  + set_person(persona: String): String
+
+}
+
+Persona "1"--"1" Passaporto
+
+@enduml
