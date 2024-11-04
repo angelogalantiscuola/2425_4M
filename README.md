@@ -1,24 +1,40 @@
 # 2425_4M
 
-## Classi
+project_root/
+│
+├── docs/
+│ ├── 01.md
+│ └── ... (other text files)
+│
+├── src/
+│ ├── e01.py
+│ └── ... (other source files)
+│
+├── tests/
+│ ├── test_01.py
+│ └── ... (other source files)
 
-- 1
-- 2
+## Running the Source Files
 
-## Ereditarietà
+To run a specific source file, navigate to the project root directory and execute:
 
-- 10
-- 11
+```bash
+python src/e01.py
+```
 
-## Associazioni
+## Running Tests
 
-- 13
-- 14
-- 15
+Run a Single Test File
+To run a single test file, use the following command:
 
-## Esercizi Avanzati
+```bash
+pytest tests/test_01.py
+```
 
-- 16
-- 17
-- 18
+## Run All Tests
 
+To run all tests in the project, execute pytest from the project root:
+
+```bash
+pytest
+```
