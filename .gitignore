@@ -1,7 +1,11 @@
+
 # temporary exclusions
 src/e17.py
 src/e18.py
 src/e18.md
+exams/v3/*
+
+pyproject.toml
 
 .vscode/*
 
