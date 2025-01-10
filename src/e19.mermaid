@@ -14,6 +14,15 @@ classDiagram
         +str esito
     }
 
+    class Vaccinazione {
+        +datetime data_somministrazione
+        +datetime data_scadenza
+    }
+
+    class Vaccino {
+        +str nome
+    }
+
     class Persona {
         +str cognome
         +str nome
@@ -42,8 +51,11 @@ classDiagram
 
     class Dipendente {
         +float stipendio
-        +str mansione
         +bool volontario
+    }
+
+    class Attivita {
+        +str nome
     }
 
 
@@ -55,3 +67,6 @@ classDiagram
     %% Persona "*" -- "1" Canile : visita
     Canile "1" -- "*" Risorsa : possiede
     Animale "1" -- "*" Visita_medica : effettua
+    Animale "1" -- "*" Vaccinazione : riceve
+    Vaccino "1" -- "*" Vaccinazione : riceve
+    Dipendente "*" -- "*" Attivita : svolge
