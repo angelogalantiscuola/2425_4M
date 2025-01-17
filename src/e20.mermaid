@@ -62,6 +62,5 @@ classDiagram
 
     Cliente "1" --> "*" Ordine : effettua
     Cliente "1" --> "*" Recensione : scrive
-    Prodotto "1" <-- "*" Recensione : scritta_per
     Ordine "1" --> "*" OrdineProdotto : contiene
     Prodotto "1" <-- "*" OrdineProdotto : riferisce_a
