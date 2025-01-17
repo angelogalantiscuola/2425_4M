@@ -1,0 +1,56 @@
+classDiagram
+    class Persona {
+        -int id
+        -str nome
+        -list[Corso] corsi
+        +int get_id()
+        +str get_nome()
+        +list[Corso] get_corsi()
+        +void aggiungi_corso(Corso corso)
+    }
+
+    class Corso {
+        -int id
+        -str nome
+        -list[Persona] partecipanti
+        +int get_id()
+        +str get_nome()
+        +list[Persona] get_partecipanti()
+        +void aggiungi_partecipante(Persona persona)
+    }
+
+    Persona "*" --> "*" Corso : partecipa
+
+
+    class Persona2 {
+        -int id
+        -str nome
+        -list[Partecipazione] partecipazioni
+        +int get_id()
+        +str get_nome()
+        +list[Partecipazione] get_partecipazioni()
+        +void aggiungi_partecipazione(Partecipazione partecipazione)
+    }
+
+    class Corso2 {
+        -int id
+        -str nome
+        -list[Partecipazione] partecipazioni
+        +int get_id()
+        +str get_nome()
+        +list[Partecipazione] get_partecipazioni()
+        +void aggiungi_partecipazione(Partecipazione partecipazione)
+    }
+
+    class Partecipazione2 {
+        -Persona persona
+        -Corso corso
+        -int voto
+        +Persona get_persona()
+        +Corso get_corso()
+        +int get_voto()
+        +void set_voto(int voto)
+    }
+
+    Persona2 "1" -- "*" Partecipazione2 : ha
+    Corso2 "1" -- "*" Partecipazione2 : ha

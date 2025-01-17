@@ -1,0 +1,57 @@
+classDiagram
+    class Persona {
+        -int id
+        -str nome
+        -CartaIdentita carta_identita
+        -list[Animale] animali
+        -list[Partecipazione] partecipazioni
+        +int get_id()
+        +str get_nome()
+        +CartaIdentita get_carta_identita()
+        +list[Animale] get_animali()
+        +void aggiungi_animale(Animale animale)
+        +list[Partecipazione] get_partecipazioni()
+        +void aggiungi_partecipazione(Partecipazione partecipazione)
+    }
+
+    class Corso {
+        -int id
+        -str nome
+        -list[Partecipazione] partecipazioni
+        +int get_id()
+        +str get_nome()
+        +list[Partecipazione] get_partecipazioni()
+        +void aggiungi_partecipazione(Partecipazione partecipazione)
+    }
+
+    class Partecipazione {
+        -Persona persona
+        -Corso corso
+        -int voto
+        +Persona get_persona()
+        +Corso get_corso()
+        +int get_voto()
+        +void set_voto(int voto)
+    }
+
+    class CartaIdentita {
+        -int numero
+        -date data_rilascio
+        -date data_scadenza
+        +int get_numero()
+        +tuple[date, date] get_date()
+    }
+
+    class Animale {
+        -int id
+        -str nome
+        -int eta
+        +int get_id()
+        +str get_nome()
+        +int get_eta()
+    }
+
+    Persona "1" --> "*" Animale : possiede
+    Persona "1" --> "1" CartaIdentita : ha
+    Persona "*" --> "*" Partecipazione : partecipa
+    Corso "*" --> "*" Partecipazione : include
