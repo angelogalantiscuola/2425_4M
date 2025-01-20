@@ -1,6 +1,7 @@
 
 # temporary exclusions
 exams/v3/*
+_temp/
 
 pyproject.toml
 

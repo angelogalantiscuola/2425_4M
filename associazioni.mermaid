@@ -1,6 +1,6 @@
 classDiagram
     class Persona {
-        -int id
+        -int **id**
         -str nome
         -CartaIdentita carta_identita
         -list[Animale] animali
@@ -53,5 +53,5 @@ classDiagram
 
     Persona "1" --> "*" Animale : possiede
     Persona "1" --> "1" CartaIdentita : ha
-    Persona "*" --> "*" Partecipazione : partecipa
-    Corso "*" --> "*" Partecipazione : include
+    Persona "1" --> "*" Partecipazione : partecipa
+    Corso "1" --> "*" Partecipazione : include
