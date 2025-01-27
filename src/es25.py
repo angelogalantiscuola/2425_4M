@@ -55,11 +55,11 @@ class Prenotazioni:
     def __str__(self):
         return f'nome cliente:{self.nome_cliente} data ora:{self.data_ora} numero di persone:{self.numero_di_persone} stato:{self.stato}'
 
-ristorante = Ristorante('Monsce')
-prenotazioni1 = Prenotazioni('James Cook',datetime.now().strftime('%Y-%m-%d %H:%M'),2,'confermata',2)
-prenotazioni2 = Prenotazioni('Robinson Cappelli',datetime.now().strftime('%Y-%m-%d %H:%M'),4,' attesa',4)
-prenotazioni3 = Prenotazioni('Sancho Sanchi',datetime.now().strftime('%Y-%m-%d %H:%M'),7,'confermata',9)
-prenotazioni4 = Prenotazioni("Lorenz Pezzolesi",datetime.now().strftime('%Y-%m-%d %H:%M'),85,'confermata',8)
+ristorante = Ristorante('Sburon')
+prenotazioni1 = Prenotazioni('Antonio Bandera',datetime.now().strftime('%Y-%m-%d %H:%M'),2,'confermata',2)
+prenotazioni2 = Prenotazioni('Mike Tyson',datetime.now().strftime('%Y-%m-%d %H:%M'),4,' attesa',4)
+prenotazioni3 = Prenotazioni('Paolo sordi',datetime.now().strftime('%Y-%m-%d %H:%M'),7,'confermata',9)
+prenotazioni4 = Prenotazioni("Antonio Cassano",datetime.now().strftime('%Y-%m-%d %H:%M'),85,'confermata',8)
 print('---------')
 ristorante.aggiungi_prenotazione(prenotazioni1)
 ristorante.aggiungi_prenotazione(prenotazioni2)
