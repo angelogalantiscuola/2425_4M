@@ -92,11 +92,11 @@ class Libreria:
         media = rating_tot / i
         print(f"la media di tutti i film è {media}")
 oggi = date.today
-film1 = Film("bho1","mio padre1",oggi,"fabio",8)           
-film2 = Film("bho2","mio padre2",oggi,"fabio",3.4)
-film3 = Film("bho3","mio padre3",oggi,"fabio",5)
-film4 = Film("bho4","mio padre4",oggi,"fabio",8)
-film5 = Film("bho5","mio padre5",oggi,"fabio",9)
+film1 = Film("scream1","scary movie",oggi,"antonio",8)           
+film2 = Film("le comiche","anthony ",oggi,"paolo",3.4)
+film3 = Film("limitless","my uncle",oggi,"luca",5)
+film4 = Film("d boys","my son",oggi,"fabio",8)
+film5 = Film("intersettalar","Cage",oggi,"frank",9)
 libreria = Libreria([film1,film2,film3,film4])
 libreria.aggiungi_film(film5)
 libreria.cerca_film_titolo_o_registra("mio padre1",False)
