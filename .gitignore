@@ -2,6 +2,7 @@
 # temporary exclusions
 _temp/
 logs/
+exams/v4/
 
 pyproject.toml
 
