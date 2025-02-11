@@ -38,9 +38,7 @@ class GestionePrenotazioni:
         """Aggiunge una nuova prenotazione al sistema."""
         self.prenotazioni.append(prenotazione)
 
-    def cerca_prenotazione(
-        self, nome: str | None = None, data: datetime | None = None
-    ) -> list[Prenotazione]:
+    def cerca_prenotazione(self, nome: str | None = None, data: datetime | None = None) -> list[Prenotazione]:
         """Cerca prenotazioni per nome del cliente o data."""
         risultati = []
         for p in self.prenotazioni:
@@ -65,3 +63,46 @@ class GestionePrenotazioni:
                 p.stato = StatoPrenotazione.CANCELLATA
                 return True
         return False
+
+
+def main():
+    # Create reservation management system
+    sistema = GestionePrenotazioni()
+
+    # Add some example reservations
+    prenotazioni = [
+        Prenotazione("Mario Rossi", datetime(2024, 2, 14, 20, 30), 4),
+        Prenotazione("Luigi Verdi", datetime(2024, 2, 14, 19, 00), 2),
+        Prenotazione("Anna Bianchi", datetime(2024, 2, 15, 21, 00), 6),
+    ]
+
+    for p in prenotazioni:
+        sistema.aggiungi_prenotazione(p)
+        print(f"Aggiunta: {p}")
+
+    print("\nTutte le prenotazioni:")
+    for p in sistema.visualizza_prenotazioni():
+        print(p)
+
+    print("\nRicerca per nome 'mario':")
+    risultati = sistema.cerca_prenotazione(nome="mario")
+    for p in risultati:
+        print(p)
+
+    print("\nRicerca per data 14/02/2024:")
+    data_ricerca = datetime(2024, 2, 14)
+    risultati = sistema.cerca_prenotazione(data=data_ricerca)
+    for p in risultati:
+        print(p)
+
+    # Try to cancel a reservation
+    if sistema.cancella_prenotazione("Mario Rossi", datetime(2024, 2, 14, 20, 30)):
+        print("\nPrenotazione cancellata con successo")
+
+    print("\nStato finale delle prenotazioni:")
+    for p in sistema.visualizza_prenotazioni():
+        print(p)
+
+
+if __name__ == "__main__":
+    main()

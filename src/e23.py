@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import List
 
 
 class Utente:
@@ -18,9 +17,7 @@ class Utente:
         self.album.append(nuovo_album)
         return nuovo_album
 
-    def carica_foto(
-        self, titolo: str, descrizione: str, album: "Album" = None
-    ) -> "Foto":
+    def carica_foto(self, titolo: str, descrizione: str, album: "Album" = None) -> "Foto":
         nuova_foto = Foto(titolo, descrizione, self, album)
         self.foto.append(nuova_foto)
         if album:
@@ -33,9 +30,7 @@ class Utente:
 
 
 class Foto:
-    def __init__(
-        self, titolo: str, descrizione: str, utente: Utente, album: "Album" = None
-    ):
+    def __init__(self, titolo: str, descrizione: str, utente: Utente, album: "Album" = None):
         # id() restituisce un identificatore unico per l'oggetto
         self.id = id(self)  # Utilizziamo id() come identificatore unico
         self.titolo = titolo
@@ -56,7 +51,7 @@ class Album:
         self.titolo = titolo
         self.descrizione = descrizione
         self.utente = utente
-        self.foto: List[Foto] = []
+        self.foto: list[Foto] = []
 
     def aggiungi_foto(self, foto: Foto):
         if foto not in self.foto:

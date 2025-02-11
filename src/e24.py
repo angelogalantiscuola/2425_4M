@@ -1,10 +1,5 @@
-from typing import List, Optional
-
-
 class Film:
-    def __init__(
-        self, titolo: str, regista: str, anno: int, genere: str, valutazione: int
-    ):
+    def __init__(self, titolo: str, regista: str, anno: int, genere: str, valutazione: int):
         if not 1 <= valutazione <= 10:
             raise ValueError("La valutazione deve essere compresa tra 1 e 10")
 
@@ -20,13 +15,13 @@ class Film:
 
 class Libreria:
     def __init__(self):
-        self.films: List[Film] = []
+        self.films: list[Film] = []
 
     def aggiungi_film(self, film: Film) -> None:
         """Aggiunge un nuovo film alla libreria."""
         self.films.append(film)
 
-    def cerca_film(self, chiave: str) -> List[Film]:
+    def cerca_film(self, chiave: str) -> list[Film]:
         """Cerca film per titolo o regista."""
         risultati = []
         chiave = chiave.lower()
@@ -35,11 +30,11 @@ class Libreria:
                 risultati.append(film)
         return risultati
 
-    def visualizza_film(self) -> List[Film]:
+    def visualizza_film(self) -> list[Film]:
         """Restituisce tutti i film presenti nella libreria."""
         return self.films
 
-    def media_valutazioni(self) -> Optional[float]:
+    def media_valutazioni(self) -> float | None:
         """Calcola la valutazione media dei film nella libreria."""
         if not self.films:
             return None
