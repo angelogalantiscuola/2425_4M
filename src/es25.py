@@ -1,79 +1,67 @@
-
 from datetime import datetime
-class Ristorante:
-    def __init__(self,nome):
-        self.nome = nome
-        self.prenotazioni = []
-    #Aggiungere nuove prenotazioni.
-
-    def aggiungi_prenotazione(self,nuova_prenotazione):
-        if nuova_prenotazione not in self.prenotazioni:
-            self.prenotazioni.append(nuova_prenotazione)
-            print('prenotazione aggiunta')
-        else:
-            print(f'prenotazione gia presente {nuova_prenotazione}')
-    #Cancellare una prenotazione.
-    def cancellare_prenotazione(self,prenotazione_da_rimuovere):
-        if prenotazione_da_rimuovere in self.prenotazioni:
-            self.prenotazioni.remove(prenotazione_da_rimuovere)
-            print('prenotazione tolta')
-        else:
-            print(f'prenotazione non presente {prenotazione_da_rimuovere}')
-    
-    #Cercare prenotazioni per nome del cliente o data.
-
-    def cerca_prenotazioni(self,cliente,data):
-        prenotazioni_stesso_data_o_cliente = []
-        if cliente != None:
-            for n in self.prenotazioni:
-                if cliente == n.nome_cliente:
-                    prenotazioni_stesso_data_o_cliente.append(n)
-        if data != None:
-            for d in self.prenotazioni:
-                
-                if data == d.data_ora:
-                    prenotazioni_stesso_data_o_cliente.append(d)
-        return prenotazioni_stesso_data_o_cliente
-    #Visualizzare tutte le prenotazioni.
-    def visualizzare_tutte_prenotazioni(self):
-        for p in self.prenotazioni:
-            print(p)
-    
- 
+from enum import Enum
 
 
-        
+class StatoPrenotazione(Enum):
+    CONFERMATA = "confermata"
+    IN_ATTESA = "in attesa"
+    CANCELLATA = "cancellata"
 
 
-class Prenotazioni:
-    def __init__(self,nome_cliente,data_ora,anno,numero_di_persone,stato):
+class Prenotazione:
+    def __init__(
+        self,
+        nome_cliente: str,
+        data_ora: datetime,
+        num_persone: int,
+        stato: StatoPrenotazione = StatoPrenotazione.IN_ATTESA,
+    ):
         self.nome_cliente = nome_cliente
         self.data_ora = data_ora
-        self.numero_di_persone = numero_di_persone
+        self.num_persone = num_persone
         self.stato = stato
 
-    def __str__(self):
-        return f'nome cliente:{self.nome_cliente} data ora:{self.data_ora} numero di persone:{self.numero_di_persone} stato:{self.stato}'
-
-ristorante = Ristorante('Sburon')
-prenotazioni1 = Prenotazioni('Antonio Bandera',datetime.now().strftime('%Y-%m-%d %H:%M'),2,'confermata',2)
-prenotazioni2 = Prenotazioni('Mike Tyson',datetime.now().strftime('%Y-%m-%d %H:%M'),4,' attesa',4)
-prenotazioni3 = Prenotazioni('Paolo sordi',datetime.now().strftime('%Y-%m-%d %H:%M'),7,'confermata',9)
-prenotazioni4 = Prenotazioni("Antonio Cassano",datetime.now().strftime('%Y-%m-%d %H:%M'),85,'confermata',8)
-print('---------')
-ristorante.aggiungi_prenotazione(prenotazioni1)
-ristorante.aggiungi_prenotazione(prenotazioni2)
-ristorante.aggiungi_prenotazione(prenotazioni3)
-ristorante.aggiungi_prenotazione(prenotazioni4)
+    def __str__(self) -> str:
+        return (
+            f"Prenotazione per {self.nome_cliente} - "
+            f"{self.data_ora.strftime('%d/%m/%Y %H:%M')} - "
+            f"{self.num_persone} persone - "
+            f"Stato: {self.stato.value}"
+        )
 
 
-print('---------')
-#ristorante.cancellare_prenotazione(prenotazioni1)
+class GestionePrenotazioni:
+    def __init__(self):
+        self.prenotazioni: list[Prenotazione] = []
 
-lista_prenotazioni = ristorante.cerca_prenotazioni('James Cook',None)
-for p in lista_prenotazioni:
-    print(p)
+    def aggiungi_prenotazione(self, prenotazione: Prenotazione) -> None:
+        """Aggiunge una nuova prenotazione al sistema."""
+        self.prenotazioni.append(prenotazione)
 
-print('---------')
-ristorante.visualizzare_tutte_prenotazioni()
+    def cerca_prenotazione(
+        self, nome: str | None = None, data: datetime | None = None
+    ) -> list[Prenotazione]:
+        """Cerca prenotazioni per nome del cliente o data."""
+        risultati = []
+        for p in self.prenotazioni:
+            if nome and nome.lower() in p.nome_cliente.lower():
+                risultati.append(p)
+            elif data and p.data_ora.date() == data.date():
+                risultati.append(p)
+        return risultati
 
+    def visualizza_prenotazioni(self) -> list[Prenotazione]:
+        """Restituisce tutte le prenotazioni nel sistema."""
+        return self.prenotazioni
+
+    def cancella_prenotazione(self, nome_cliente: str, data_ora: datetime) -> bool:
+        """Cancella una prenotazione specifica."""
+        for p in self.prenotazioni:
+            if (
+                p.nome_cliente.lower() == nome_cliente.lower()
+                and p.data_ora == data_ora
+                and p.stato != StatoPrenotazione.CANCELLATA
+            ):
+                p.stato = StatoPrenotazione.CANCELLATA
+                return True
+        return False
