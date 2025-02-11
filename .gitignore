@@ -1,6 +1,7 @@
 
 # temporary exclusions
 _temp/
+logs/
 
 pyproject.toml
 
