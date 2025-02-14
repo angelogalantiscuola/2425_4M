@@ -1,8 +1,9 @@
+exams/v4/_sol
 
 # temporary exclusions
 _temp/
 logs/
-exams/v4/
+# exams/v4/
 
 pyproject.toml
 
