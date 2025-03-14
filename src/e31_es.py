@@ -23,7 +23,7 @@ if __name__ == "__main__":
     tentativo_1 = QuizAttempt(quiz, studente)
 
     # Sottomettere le risposte
-    tentativo_1.submitRisposte([0])  # Risposta corretta
+    tentativo_1.submitRisposte([0])  # Risposta sbagliata
 
     # Stampare i risultati
     print(f"Punteggio: {tentativo_1.punteggio}")
