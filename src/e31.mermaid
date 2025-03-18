@@ -1,0 +1,48 @@
+classDiagram
+
+    Corso "1" --> "1" Quiz : ha
+    Studente "*" --> "*" Corso : frequenta
+    Quiz "1" --> "*" Domanda : composti
+
+    class Domanda {
+        +String testo
+        +list[str] risposte
+        +int risposta_corretta
+        +__init__(String testo, list[str] risposte, int risposta_corretta)
+    }
+
+    class Studente {
+        +String nome
+        +list[Corso] corso
+        +__init__(String nome)
+        %% +aggiungiCorso(Corso corso)
+    }
+
+    class Corso {
+        +String titolo
+        +String descrizione
+        +String docente
+        +Quiz quiz
+        +list[Studente] studenti
+        +__init__(String titolo, String descrizione, String docente)
+        %% aggiungiStudente agisce anche sull'oggetto 
+        %% studente inserendo il corso nella lista
+        +aggiungiStudente(Studente studente) 
+        +aggiungiQuiz(Quiz quiz)
+    }
+
+    class Quiz {
+        +String nome
+        +list[Domanda] domande
+        %% %% SOLUZIONE 1
+        %% +__init__(String nome, list[Domanda] domande)
+        %% SOLUZIONE 2
+        +__init__(String nome)
+        +aggiungiDomanda(Domanda domanda)
+        %% %% SOLUZIONE 3
+        %% +__init__(String nome)
+        %% +aggiungiDomanda(String testo, list[str] risposte, int risposta_corretta)
+    }
+
+
+
