@@ -1,0 +1,53 @@
+classDiagram
+
+    Utente "*" -- "*" Video : guarda
+    Utente "1" -- "*" Playlist : crea
+    Playlist "*" -- "*" Video : contiene
+    Utente "1" -- "1" Abbonamento : ha
+    Video "1" -- "*" Commento : riceve
+
+    class Utente {
+        +str nomeUtente
+        +str email
+        +str password
+        +list[Video] videoVisti
+        +list[Playlist] playlistCreate
+        +Abbonamento abbonamento
+        +void guardaVideo(Video video)
+        +void creaPlaylist(Playlist playlist)
+        +void aggiungiVideoPlaylist(Playlist playlist, Video video)
+        +void rimuoviVideoPlaylist(Playlist playlist, Video video)
+        +void cancellaPlaylist(Playlist playlist)
+        +void commentaVideo(Video video, Commento commento)
+    }
+
+    class Video {
+        +str titolo
+        +str descrizione
+        +str url
+        +int durata
+        +list[Commento] commenti
+        +void aggiungiCommento(Commento commento)
+    }
+
+    class Playlist {
+        +str nome
+        +Utente creatore
+        +list[Video] videos
+        +void aggiungiVideo(Video video)
+        +void rimuoviVideo(Video video)
+    }
+
+    class Abbonamento {
+        +str tipo
+        +float prezzo
+        +DateTime dataInizio
+        +DateTime dataFine
+    }
+
+    class Commento {
+        +Utente autore
+        +str testo
+        +DateTime dataPubblicazione
+        +Video video
+    }
