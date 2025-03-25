@@ -1,0 +1,47 @@
+classDiagram
+    Autore "*" --> "*" MovimentoLetterario : appartiene
+    Autore "*" --> "1" Citta : nato
+    Autore "1" --> "*" Opera : scrive
+    Raccolta "1" --> "*" Opera : divisa
+    Opera "*" --> "*" Personaggio : racconta_di
+
+    class Autore {
+        +id int
+        +str nome
+        +str cognome
+        +datetime nascita
+        +datetime decesso
+        +list[Opera] opere
+        +Citta citta
+        +list[MovimentoLetterario] movimentoletterario
+    }
+    class Citta {
+        +id int
+        +str nome
+        +str stato
+    }
+    class MovimentoLetterario {
+        +id int
+        +str tipo
+        +datetime periodo_inizio
+        +datetime periodo_fine
+        +list[Autore] autori
+    }
+    class Raccolta {
+        +id int
+        +str nome
+        +list[Opera] opere
+    }
+    class Opera {
+        +id int
+        +str nome
+        +str tipo [drammatica, romantica]
+        +str stile [endecasillabi, prosa]
+        +Autore autore
+        +Raccolta raccolta
+        +list[Personaggio] personaggio
+    }
+    class Personaggio {
+        +str nome
+        %% +list[Opera] opera
+    }
