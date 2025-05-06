@@ -1,11 +1,17 @@
 from datetime import datetime
-from typing import List, Optional
+from typing import List
 from enum import Enum
 
 
 class TipoClasse(Enum):
     BUSINESS = "Business"
     ECONOMY = "Economy"
+
+
+class StatoPrenotazione(Enum):
+    VOLO_PIENO = "Volo pieno"
+    VOLO_NON_TROVATO = "Volo non trovato"
+    PRENOTAZIONE_CONFERMATA = "Prenotazione confermata"
 
 
 class Volo:
@@ -59,18 +65,28 @@ class SistemaPrenotazioni:
 
     def aggiungi_prenotazione(
         self, nome_passeggero: str, tipo_classe: TipoClasse, numero_volo: str
-    ) -> Optional[Prenotazione]:
+    ) -> StatoPrenotazione:
         """
         Aggiunge una nuova prenotazione se ci sono posti disponibili.
-        Restituisce la prenotazione creata o None se non è possibile effettuarla.
+        Restituisce la prenotazione creata o uno stato di errore.
         """
-        for volo in self.voli:
-            if volo.numero_volo == numero_volo and volo.posti_disponibili() > 0:
-                prenotazione = Prenotazione(nome_passeggero, tipo_classe, volo)
-                self.prenotazioni.append(prenotazione)
-                volo.prenotazioni.append(prenotazione)
-                return prenotazione
-        return None
+        volo_trovato = None
+        for v in self.voli:
+            if v.numero_volo == numero_volo:
+                volo_trovato = v
+                break
+
+        if not volo_trovato:
+            return StatoPrenotazione.VOLO_NON_TROVATO
+
+        if volo_trovato.posti_disponibili() > 0:
+            prenotazione = Prenotazione(nome_passeggero, tipo_classe, volo_trovato)
+            self.prenotazioni.append(prenotazione)
+            volo_trovato.prenotazioni.append(prenotazione)
+            # return prenotazione  # O potremmo restituire StatoPrenotazione.PRENOTAZIONE_CONFERMATA se si preferisce solo lo stato
+            return StatoPrenotazione.PRENOTAZIONE_CONFERMATA
+        else:
+            return StatoPrenotazione.VOLO_PIENO
 
     def visualizza_voli(self) -> List[Volo]:
         """Restituisce tutti i voli nel sistema."""
@@ -108,12 +124,45 @@ def main():
         print(volo)
 
     # Effettua alcune prenotazioni
-    sistema.aggiungi_prenotazione("Mario Rossi", TipoClasse.BUSINESS, "AZ100")
-    sistema.aggiungi_prenotazione("Luigi Verdi", TipoClasse.ECONOMY, "AZ100")
-    sistema.aggiungi_prenotazione("Anna Bianchi", TipoClasse.BUSINESS, "AZ200")
+    print("\nTentativi di prenotazione:")
+    risultato1 = sistema.aggiungi_prenotazione("Mario Rossi", TipoClasse.BUSINESS, "AZ100")
+    if isinstance(risultato1, Prenotazione):
+        print(f"Prenotazione per {risultato1.nome_passeggero} confermata.")
+    else:
+        print(f"Errore prenotazione Mario Rossi: {risultato1.value}")
+
+    risultato2 = sistema.aggiungi_prenotazione("Luigi Verdi", TipoClasse.ECONOMY, "AZ100")
+    if isinstance(risultato2, Prenotazione):
+        print(f"Prenotazione per {risultato2.nome_passeggero} confermata.")
+    else:
+        print(f"Errore prenotazione Luigi Verdi: {risultato2.value}")
+
+    risultato3 = sistema.aggiungi_prenotazione("Anna Bianchi", TipoClasse.BUSINESS, "AZ200")
+    if isinstance(risultato3, Prenotazione):
+        print(f"Prenotazione per {risultato3.nome_passeggero} confermata.")
+    else:
+        print(f"Errore prenotazione Anna Bianchi: {risultato3.value}")
+
+    # Test volo pieno (supponendo che volo2 abbia capacità 1 per semplicità di test, o aggiungendo prenotazioni fino a riempirlo)
+    # Per testare VOLO_PIENO, modifichiamo temporaneamente la capacità di AZ200 o aggiungiamo prenotazioni
+    # Qui simuliamo aggiungendo prenotazioni fino a riempire volo2 (se capacità 1)
+    # volo2.numero_massimo_passeggeri = 1 # Modifica temporanea per test
+    # sistema.aggiungi_prenotazione("Test Pieno", TipoClasse.ECONOMY, "AZ200") # Questa dovrebbe riempire
+
+    risultato4 = sistema.aggiungi_prenotazione("Giovanni Neri", TipoClasse.ECONOMY, "AZ200")  # Tentativo su volo pieno
+    if isinstance(risultato4, Prenotazione):
+        print(f"Prenotazione per {risultato4.nome_passeggero} confermata.")
+    else:
+        print(f"Errore prenotazione Giovanni Neri: {risultato4.value}")
+
+    risultato5 = sistema.aggiungi_prenotazione("Laura Gialli", TipoClasse.ECONOMY, "AZ300")  # Volo non esistente
+    if isinstance(risultato5, Prenotazione):
+        print(f"Prenotazione per {risultato5.nome_passeggero} confermata.")
+    else:
+        print(f"Errore prenotazione Laura Gialli: {risultato5.value}")
 
     # Visualizzazione delle prenotazioni
-    print("\nPrenotazioni effettuate:")
+    print("\nPrenotazioni effettuate con successo:")
     for prenotazione in sistema.visualizza_prenotazioni():
         print(prenotazione)
 
