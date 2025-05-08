@@ -1,0 +1,67 @@
+classDiagram
+    class Utente {
+        +string id_utente
+        +string nome_utente
+        +string email
+        +List~ProgettoMusicale~ progetti
+        +crea_progetto(titolo: string) ProgettoMusicale
+    }
+
+    class ProgettoMusicale {
+        +string id_progetto
+        +string titolo_progetto
+        +date data_creazione
+        +string genere_musicale
+        +List~TracciaAudio~ tracce
+        +aggiungi_traccia(nome_traccia: string) TracciaAudio
+    }
+
+    class TracciaAudio {
+        +string id_traccia
+        +string nome_traccia
+        +float durata_secondi
+        +int volume_db
+        +string sequenza_note_manuali
+        +StrumentoVirtuale strumento_utilizzato
+        +List~EffettoAudio~ effetti_applicati
+        +aggiungi_strumento(strumento: StrumentoVirtuale) None
+        +applica_effetto(effetto: EffettoAudio) None
+        +rimuovi_effetto(effetto: EffettoAudio) None
+        +imposta_sequenza_note(note: string) None
+        +modifica_volume(nuovo_volume_db: int) None
+    }
+
+    class StrumentoVirtuale {
+        +string id_strumento
+        +string nome_strumento
+        +TipoStrumento tipo_strumento_virtuale
+        +suona_nota(nota: string, durata: float) None
+    }
+
+    class EffettoAudio {
+        +string id_effetto
+        +string nome_effetto
+        +TipoEffetto tipo_effetto_audio
+    }
+
+    class TipoStrumento {
+        <<enumeration>>
+        BATTERIA
+        CHITARRA
+        BASSO
+    }
+
+    class TipoEffetto {
+        <<enumeration>>
+        RIVERBERO
+        DELAY
+        DISTORSIONE
+    }
+
+    Utente "1" -- "0..*" ProgettoMusicale : possiede
+    ProgettoMusicale "1" -- "0..*" TracciaAudio : contiene
+    TracciaAudio "1" -- "0..1" StrumentoVirtuale : utilizza
+    TracciaAudio "1" -- "0..*" EffettoAudio : applica
+
+    StrumentoVirtuale --> TipoStrumento
+    EffettoAudio --> TipoEffetto
