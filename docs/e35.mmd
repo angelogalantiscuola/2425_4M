@@ -5,6 +5,9 @@ classDiagram
         +string email
         +List~ProgettoMusicale~ progetti
         +crea_progetto(titolo: string) ProgettoMusicale
+        +progetti_per_genere() Dict~string, int~
+        +conta_progetti_totali() int
+        +strumento_piu_usato() StrumentoVirtuale
     }
 
     class ProgettoMusicale {
@@ -14,6 +17,8 @@ classDiagram
         +string genere_musicale
         +List~TracciaAudio~ tracce
         +aggiungi_traccia(nome_traccia: string) TracciaAudio
+        +percentuale_tracce_con_effetti() float
+        +effetto_piu_usato() TipoEffetto
     }
 
     class TracciaAudio {
@@ -29,6 +34,8 @@ classDiagram
         +rimuovi_effetto(effetto: EffettoAudio) None
         +imposta_sequenza_note(note: string) None
         +modifica_volume(nuovo_volume_db: int) None
+        +ha_effetti() bool
+        +numero_note() int
     }
 
     class StrumentoVirtuale {
