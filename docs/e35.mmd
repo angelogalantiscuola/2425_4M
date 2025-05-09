@@ -60,7 +60,7 @@ classDiagram
 
     Utente "1" -- "0..*" ProgettoMusicale : possiede
     ProgettoMusicale "1" -- "0..*" TracciaAudio : contiene
-    TracciaAudio "1" -- "0..1" StrumentoVirtuale : utilizza
+    TracciaAudio "1" -- "1" StrumentoVirtuale : utilizza
     TracciaAudio "1" -- "0..*" EffettoAudio : applica
 
     StrumentoVirtuale --> TipoStrumento
