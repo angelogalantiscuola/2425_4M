@@ -130,13 +130,16 @@ class ProgettoMusicale:
             TipoEffetto.DISTORSIONE: 0,
         }
 
+        # Controlla ogni traccia e i suoi effetti
         for traccia in self.tracce:
             for effetto in traccia.effetti_applicati:
                 tipo = effetto.tipo_effetto_audio
                 effetti_count[tipo] += 1
 
+        # Trova il valore massimo
         max_count = max(effetti_count.values())
 
+        # Trova il tipo di effetto con il conteggio massimo
         for tipo, count in effetti_count.items():
             if count == max_count:
                 return tipo
@@ -166,7 +169,10 @@ class Utente:
         """Restituisce un dizionario con il conteggio dei progetti per ogni genere musicale."""
         generi_count: Dict[str, int] = {}
         for progetto in self.progetti:
-            generi_count[progetto.genere_musicale] = generi_count.get(progetto.genere_musicale, 0) + 1
+            if progetto.genere_musicale in generi_count:
+                generi_count[progetto.genere_musicale] += 1
+            else:
+                generi_count[progetto.genere_musicale] = 1
         return generi_count
 
     def conta_progetti_totali(self) -> int:

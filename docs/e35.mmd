@@ -65,11 +65,11 @@ classDiagram
         DISTORSIONE
     }
 
-    Utente "1" -- "0..*" ProgettoMusicale : possiede
-    ProgettoMusicale "1" -- "0..*" TracciaAudio : contiene
+    Utente "1" -- "*" ProgettoMusicale : possiede
+    ProgettoMusicale "1" -- "*" TracciaAudio : contiene
     TracciaAudio "1" -- "1" StrumentoVirtuale : utilizza
     TracciaAudio "1" -- "1" StrumentoVirtuale : utilizza
-    TracciaAudio "1" -- "0..*" EffettoAudio : applica
+    TracciaAudio "1" -- "*" EffettoAudio : applica
 
     StrumentoVirtuale --> TipoStrumento
     EffettoAudio --> TipoEffetto
