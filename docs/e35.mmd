@@ -19,8 +19,6 @@ classDiagram
         +aggiungi_traccia(nome_traccia: string) TracciaAudio
         +percentuale_tracce_con_effetti() float
         +effetto_piu_usato() TipoEffetto
-        +percentuale_tracce_con_effetti() float
-        +effetto_piu_usato() TipoEffetto
     }
 
     class TracciaAudio {
@@ -67,7 +65,6 @@ classDiagram
 
     Utente "1" -- "*" ProgettoMusicale : possiede
     ProgettoMusicale "1" -- "*" TracciaAudio : contiene
-    TracciaAudio "1" -- "1" StrumentoVirtuale : utilizza
     TracciaAudio "1" -- "1" StrumentoVirtuale : utilizza
     TracciaAudio "1" -- "*" EffettoAudio : applica
 
