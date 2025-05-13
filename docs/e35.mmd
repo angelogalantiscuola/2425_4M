@@ -1,11 +1,12 @@
 classDiagram
+
     class Utente {
         +string id_utente
         +string nome_utente
         +string email
         +List~ProgettoMusicale~ progetti
         +crea_progetto(titolo: string, genere_musicale: string) ProgettoMusicale
-        +progetti_per_genere() Dict~string, int~
+        +progetti_per_genere() Dict ~string~, ~int~
         +conta_progetti_totali() int
         +strumento_piu_usato() StrumentoVirtuale
     }
