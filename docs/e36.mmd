@@ -1,0 +1,67 @@
+classDiagram
+    class Direzione {
+        <<enumeration>>
+        UP
+        DOWN
+        LEFT
+        RIGHT
+    }
+
+    class TipoOggetto {
+        <<enumeration>>
+        POZIONE
+        AMULETO
+        CHIAVE
+    }
+
+    class ClassePersonaggio {
+        <<enumeration>>
+        GUERRIERO
+        MAGO
+        LADRO
+    }
+
+    class Giocatore {
+        +string nome_utente
+        +string email
+        +List~Personaggio~ personaggi
+        +crea_personaggio(nome: string, classe: string) Personaggio
+        +seleziona_personaggio(personaggio: Personaggio) void
+    }
+
+    class Personaggio {
+        +string nome_personaggio
+        +ClassePersonaggio classe_personaggio
+        +int livello
+        +int punti_vita
+        +Stanza stanza_corrente
+        +List~Oggetto~ inventario
+        +muovi(direzione: Direzione) bool
+        +raccogli_oggetto(oggetto: Oggetto) bool
+        +usa_oggetto(oggetto: Oggetto) string
+    }
+
+    class Stanza {
+        +string nome_stanza
+        +string descrizione
+        +bool stanza_aperta
+        ~Stanza~ stanze[Direzione]
+        +List~Oggetto~ oggetti
+        +descrivi_stanza() string
+    }
+
+    class Oggetto {
+        +string nome
+        +string descrizione
+        +bool raccoglibile
+        +TipoOggetto tipo
+    }
+
+    Giocatore "1" -- "*" Personaggio : Controlla
+    Personaggio "*" -- "1" Stanza : SiTrovaIn
+    Stanza "1" -- "*" Oggetto : Contiene
+    Stanza "1" -- "*" Stanza : CollegatoA
+    Personaggio "1" -- "*" Oggetto : Possiede
+    Personaggio -- ClassePersonaggio
+    Oggetto -- TipoOggetto
+    Stanza -- Direzione
