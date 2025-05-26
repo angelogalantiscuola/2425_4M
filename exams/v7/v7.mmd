@@ -1,0 +1,52 @@
+classDiagram
+    class Utente {
+        +string id_utente
+        +string nome_utente
+        +string email
+        +List~ContoBancario~ conti
+        +registra_transazione(conto: ContoBancario, importo: float, categoria: CategoriaSpesa, descrizione: string) Transazione
+        +totale_spese_mensili() float
+        +spese_per_categoria() Dict~CategoriaSpesa, float~
+        +categoria_piu_costosa() CategoriaSpesa
+    }
+
+    class ContoBancario {
+        +string id_conto
+        +string nome_conto
+        +float saldo_attuale
+        +List~Transazione~ transazioni
+        +saldo_disponibile() float
+        +media_spese_totali() float
+        +report_mensile() List~Transazione~
+        +aggiungi_transazione(transazione: Transazione) None
+    }
+
+    class Transazione {
+        +string id_transazione
+        +date data
+        +float importo
+        +string descrizione
+        +TipoTransazione tipo
+        +CategoriaSpesa categoria
+    }
+
+    class CategoriaSpesa {
+        <<enumeration>>
+        CIBO
+        TRASPORTI
+        CASA
+        SVAGO
+        SALUTE
+        ALTRO
+    }
+
+    class TipoTransazione {
+        <<enumeration>>
+        ENTRATA
+        USCITA
+    }
+
+    Utente "1" -- "*" ContoBancario : possiede
+    ContoBancario "1" -- "*" Transazione : registra
+    Transazione -- CategoriaSpesa
+    Transazione -- TipoTransazione
