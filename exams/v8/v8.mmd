@@ -1,0 +1,52 @@
+classDiagram
+    class Apicoltore {
+        +string id_apicoltore
+        +string nome
+        +string numero_licenza
+        +List~Alveare~ alveari
+        +produzione_per_tipo() Dict~TipoMiele, float~
+        +alveare_piu_produttivo() Alveare
+        +registra_raccolta() RaccoltaMiele
+        +aggiungi_alveare() void
+    }
+
+    class Alveare {
+        +string id_alveare
+        +string posizione_gps
+        +date data_installazione
+        +Sciame sciame
+        +List~RaccoltaMiele~ raccolte
+        +produzione_totale() float
+        +media_raccolte() float
+        +aggiungi_raccolta() void
+        +eta_giorni() int
+    }
+
+    class Sciame {
+        +string id_sciame
+        +int numero_api_stimato
+        +bool ha_regina
+    }
+
+    class RaccoltaMiele {
+        +string id_raccolta
+        +date data_raccolta
+        +float quantita_kg
+        +TipoMiele tipo
+        +string note
+    }
+
+    class TipoMiele {
+        <<enumeration>>
+        ACACIA
+        TIGLIO
+        CASTAGNO
+        MILLEFIORI
+        EUCALIPTO
+        ALTRO
+    }
+
+    Apicoltore "1" -- "*" Alveare : gestisce
+    Alveare "1" -- "1" Sciame : ospita
+    Alveare "1" -- "*" RaccoltaMiele : produce
+    RaccoltaMiele -- TipoMiele

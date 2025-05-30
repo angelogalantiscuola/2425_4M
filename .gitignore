@@ -5,7 +5,6 @@ src/e31.py
 .venv
 *37*
 
-
 # temporary exclusions
 _temp/
 logs/
